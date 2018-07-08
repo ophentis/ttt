@@ -34,6 +34,9 @@ class Game {
 	 * @return {boolean} - can place a move
 	 */
 	checkMove(pos) {
+		if(pos < 0 || pos >= this.size*this.size)
+			return false
+
 		const move = getTableMove(this.table, pos)
 		return !Game.isPlayerMove(move)
 	}
@@ -71,12 +74,12 @@ class Game {
 }
 
 function getTableMove(table, position) {
-	const size = table.size
+	const size = table.length
 	return table[position/size|0][position%size]
 }
 
 function setTableMove(table, position, value) {
-	const size = table.size
+	const size = table.length
 	table[position/size|0][position%size] = value
 }
 

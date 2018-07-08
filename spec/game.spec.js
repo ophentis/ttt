@@ -53,8 +53,16 @@ describe('A Game', () => {
 			expect(this.game.checkMove(1)).toBe(true)
 		})
 
-		it('place a move', () => {
-			expect(this.game.addMove(1, 'x')).toBe(true)
+		it('can place move on all position', () => {
+			expect(this.game.addMove(0, 'x')).toBe(true)
+			expect(this.game.addMove(1, 'o')).toBe(true)
+			expect(this.game.addMove(2, 'x')).toBe(true)
+			expect(this.game.addMove(3, 'o')).toBe(true)
+			expect(this.game.addMove(4, 'x')).toBe(true)
+			expect(this.game.addMove(5, 'o')).toBe(true)
+			expect(this.game.addMove(6, 'x')).toBe(true)
+			expect(this.game.addMove(7, 'o')).toBe(true)
+			expect(this.game.addMove(8, 'x')).toBe(true)
 		})
 
 		it('check a move is invalid', () => {
@@ -62,6 +70,24 @@ describe('A Game', () => {
 			expect(this.game.checkMove(1)).toBe(false)
 		})
 
+	})
+
+	describe('for size above 3', () => {
+		it('can place move on all position with size 4', () => {
+			const size = 4
+			this.game = new Game(size)
+			for(let i=0; i<size*size; i++) {
+				expect(this.game.addMove(i, 'x')).toBe(true)
+			}
+		})
+
+		it('can place move on all position with size 10', () => {
+			const size = 10
+			this.game = new Game(size)
+			for(let i=0; i<size*size; i++) {
+				expect(this.game.addMove(i, 'x')).toBe(true)
+			}
+		})
 	})
 
 })
