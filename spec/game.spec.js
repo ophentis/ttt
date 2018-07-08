@@ -194,6 +194,7 @@ describe('A Game', () => {
 			this.game.addMove(4, 'x')
 			expect(this.game.isWin(4)).toBe(false)
 		})
+
 	})
 
 })

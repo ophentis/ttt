@@ -1,3 +1,5 @@
+const debug = require('debug')('Game')
+
 class Game {
 
 	/**
@@ -96,7 +98,7 @@ class Game {
 
 		// check same row for row rules
 		if(row(pos) == row(pos+2)) 		checkList.push([0, 1, 2])
-		if(row(pos-1) == row(pos+1)) 	checkList.push([1, 0, 1])
+		if(row(pos-1) == row(pos+1)) 	checkList.push([-1, 0, 1])
 		if(row(pos-2) == row(pos)) 		checkList.push([-2, -1, 0])
 
 		const insideTable = (rule) => {
@@ -111,10 +113,15 @@ class Game {
 			return move == playerMove
 		}
 
-		return checkList
-			.filter(insideTable)
-			.map(rule => rule.map(toTableMove))	// turn all offset to moves
-			.some(moves => moves.every(isPlayerMove)) // any of set are from this player
+		let rules = checkList.filter(insideTable)
+		debug(rules)
+
+		// turn all offset to moves
+		let moves = rules.map(rule => rule.map(toTableMove))
+		debug(moves)
+
+		// any of set are from this player
+		return moves.some(moves => moves.every(isPlayerMove))
 	}
 
 	clone() {
