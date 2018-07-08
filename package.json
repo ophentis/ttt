@@ -4,7 +4,8 @@
   "description": "a simple game for exercise",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine",
+    "lint": "eslint **/*.js --fix",
+    "test": "eslint **/*.js && jasmine",
     "start": "node index.js"
   },
   "keywords": [
@@ -13,6 +14,8 @@
   "author": "Willy Tseng",
   "license": "UNLICENSED",
   "devDependencies": {
+    "eslint": "^5.0.1",
+    "eslint-plugin-jasmine": "^2.10.1",
     "ghooks": "^2.0.4",
     "jasmine": "^3.1.0"
   },
