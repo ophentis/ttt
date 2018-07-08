@@ -1,0 +1,25 @@
+{
+  "name": "tic-tac-toe",
+  "version": "0.1.0",
+  "description": "a simple game for exercise",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "exercise"
+  ],
+  "author": "Willy Tseng",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "ghooks": "^2.0.4",
+    "jasmine": "^3.1.0"
+  },
+  "dependencies": {},
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run test"
+    }
+  }
+}
