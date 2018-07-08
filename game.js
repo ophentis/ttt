@@ -30,7 +30,7 @@ class Game {
 
 	/**
 	 * check if a posistion is acceptable for a move
-	 * @param {number} pos - position of table start from 0
+	 * @param {number} pos - Position of table start from 0
 	 * @return {boolean} - can place a move
 	 */
 	checkMove(pos) {
@@ -43,7 +43,7 @@ class Game {
 
 	/**
 	 * place a move on position
-	 * @param {number} pos - Name for player O
+	 * @param {number} pos - Position of the move
 	 * @param {string} move - enum('o','x')
 	 * @return {boolean} - success
 	 */
