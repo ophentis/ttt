@@ -1,7 +1,10 @@
 class Game {
 
-	constructor(size = 3) {
+	constructor(size = 3, playerX = 'x', playerO = 'o') {
 		if (size < 0) throw Error('invalide table size')
+
+		this.playerX = playerX || 'x'
+		this.playerO = playerO || 'o'
 
 		const outer = new Array(size)
 		for (let i=0; i<size; i++) {

@@ -25,6 +25,16 @@ describe('A Game', () => {
 			expect(game40.table.length).toBe(40)
 			expect(game40.table[0].length).toBe(40)
 		})
+
+		it('should have name for players', () => {
+			const game = new Game()
+			expect(game.playerX).toBeTruthy()
+			expect(game.playerO).toBeTruthy()
+
+			const game4 = new Game(4, 'A', 'B')
+			expect(game4.playerX).toBe('A')
+			expect(game4.playerO).toBe('B')
+		})
 	})
 
 	describe('function', () => {
