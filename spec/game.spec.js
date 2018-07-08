@@ -37,17 +37,31 @@ describe('A Game', () => {
 		})
 	})
 
-	describe('function', () => {
-		let game = null
+	describe('can', () => {
+		// let game = null
 
-		beforeAll(() => {
-			game = new Game()
+		beforeEach(() => {
+			this.game = new Game()
 		})
 
-		it('should return a clone of table', () => {
-			const table = game.clone
+		it('return a clone of table', () => {
+			const table = this.game.clone()
 			expect(table).toBeTruthy()
 		})
+
+		it('check a move is valid', () => {
+			expect(this.game.checkMove(1)).toBe(true)
+		})
+
+		it('place a move', () => {
+			expect(this.game.addMove(1, 'x')).toBe(true)
+		})
+
+		it('check a move is invalid', () => {
+			this.game.addMove(1, 'x')
+			expect(this.game.checkMove(1)).toBe(false)
+		})
+
 	})
 
 })
