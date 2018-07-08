@@ -44,11 +44,6 @@ describe('A Game', () => {
 			this.game = new Game()
 		})
 
-		it('return a clone of table', () => {
-			const table = this.game.clone()
-			expect(table).toBeTruthy()
-		})
-
 		it('check a move is valid', () => {
 			expect(this.game.checkMove(1)).toBe(true)
 		})

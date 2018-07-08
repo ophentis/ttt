@@ -124,10 +124,6 @@ class Game {
 		return moves.some(moves => moves.every(isPlayerMove))
 	}
 
-	clone() {
-		return JSON.parse(JSON.stringify(this.table))
-	}
-
 	/**
 	 * check if a move is either for player x or o
 	 * @param {string} move - enum('o','x')
