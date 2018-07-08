@@ -71,25 +71,27 @@ class Game {
 		if( !Game.isPlayerMove(playerMove) )
 			return false
 
+		const size = this.size
 		// offset of each positions to check
 		// each set ordered by smallest offset number
-		const checkList = [
-			[0, 1, 2],
-			[0, 2, 4],
-			[0, 3, 6],
-			[0, 4, 8],
-			[-1, 0, 1],
-			[-2, 0, 2],
-			[-2, -1, 0],
-			[-3, 0, 3],
-			[-4, 0, 4],
-			[-4, -2, 0],
-			[-6, -3, 0],
-			[-8, -4, 0],
+		let checkList = [
+			[0, size, 2*size],
+			[-size, 0, size],
+			[-size*2, -size, 0],
 		]
 
+		if(pos%size+2 < size) 										checkList.push([0, size+1, 2*(size+1)])
+		if(pos%size+1 < size && pos%size > 0) 		checkList.push([-(size+1), 0, size+1])
+		if(pos%size > 1) 													checkList.push([-(size+1)*2, -(size+1), 0])
+		if(pos%size > 1) 													checkList.push([0, size-1, 2*(size-1)])
+		if(pos%size > 0 && pos%size+1 < size ) 		checkList.push([-(size-1), 0, size-1])
+		if(pos%size+2 < size) 										checkList.push([-(size-1)*2, -(size-1), 0])
+		if((pos/size|0) == ((pos+2)/size|0)) 			checkList.push([0, 1, 2])
+		if(((pos-1)/size|0) == ((pos+1)/size|0)) 	checkList.push([1, 0, 1])
+		if(((pos-2)/size|0) == (pos/size|0)) 			checkList.push([-2, -1, 0])
+
 		const insideTable = (rule) => {
-			return pos+rule[0] >= 0 && pos+rule[2] < this.table.length*this.table.length
+			return pos+rule[0] >= 0 && pos+rule[2] < this.size * this.size
 		}
 
 		const toTableMove = (offset) => {
@@ -120,11 +122,13 @@ class Game {
 	}
 }
 
+// @private
 function getTableMove(table, position) {
 	const size = table.length
 	return table[position/size|0][position%size]
 }
 
+// @private
 function setTableMove(table, position, value) {
 	const size = table.length
 	table[position/size|0][position%size] = value
