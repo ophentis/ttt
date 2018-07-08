@@ -11,10 +11,6 @@ let game = null
 let position = null
 let moveCount = 0
 
-readlineSync.setDefaultOptions({
-	prompt: '>> '
-})
-
 while (state != 'EXIT') {
 
 	switch (state) {
