@@ -28,5 +28,8 @@
     "ghooks": {
       "pre-commit": "npm run test"
     }
+  },
+  "engines": {
+    "node": ">=4.0.0"
   }
 }

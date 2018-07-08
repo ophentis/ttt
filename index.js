@@ -11,30 +11,33 @@ let game = null
 let position = null
 let moveCount = 0
 
-readlineSync.setDefaultOptions({prompt: '>> '})
+readlineSync.setDefaultOptions({
+	prompt: '>> '
+})
 
-while(true) {
+while (state != 'EXIT') {
 
-	switch(state) {
+	switch (state) {
 		case 'BEGIN':
 			state = 'SIZE'
 			break
 
 		case 'SIZE':
-			size = readlineSync.question('Size of game? (size>=3):\n>> ')|0
-			if( size < 3 ) break
+			size = readlineSync.question('Size of game? (size>=3):\n>> ') | 0
+			if (size < 3) break
 
-			if(size > 15) {
-				let yes = readlineSync.keyInYN(`Size $size need a very big screen to play, are you sure?\n>> `)
+			if (size > 15) {
+				let yes = readlineSync.keyInYN('Size $size need a very big screen to play, are you sure?\n>> ')
 				if (!yes) break
 			}
 
 			state = 'PLAYER1'
+			break
 
 		case 'PLAYER1':
 
 			playerX = readlineSync.question('Enter name for Player 1:\n>> ')
-			if( !playerX.length ) break
+			if (!playerX.length) break
 
 			console.log()
 
@@ -44,8 +47,8 @@ while(true) {
 		case 'PLAYER2':
 
 			playerO = readlineSync.question('Enter name for Player 2:\n>> ')
-			if( !playerO.length ) break
-			if( playerO == playerX ) {
+			if (!playerO.length) break
+			if (playerO == playerX) {
 				console.log('try a different name different than Player 1.')
 				break
 			}
@@ -65,8 +68,8 @@ while(true) {
 			displayGameTable(game.table)
 
 			position = readlineSync.question(`${game.playerX}, choose a box to place an 'x' into:\n>> `)
-			position = (position|0) - 1
-			if( !game.checkMove(position) ) {
+			position = (position | 0) - 1
+			if (!game.checkMove(position)) {
 				console.log('Bad move')
 				break
 			}
@@ -74,12 +77,12 @@ while(true) {
 			console.log()
 
 			game.addMove(position, 'x')
-			if( game.isWin(position) ) {
+			if (game.isWin(position)) {
 				state = 'PLAYER1WIN'
 				break
 			}
 
-			if( ++moveCount >= game.size*game.size ) {
+			if (++moveCount >= game.size * game.size) {
 				state = 'DRAW'
 				break
 			}
@@ -92,8 +95,8 @@ while(true) {
 			displayGameTable(game.table)
 
 			position = readlineSync.question(`${game.playerO}, choose a box to place an 'o' into:\n>> `)
-			position = (position|0) - 1
-			if( !game.checkMove(position) ) {
+			position = (position | 0) - 1
+			if (!game.checkMove(position)) {
 				console.log('Bad move')
 				break
 			}
@@ -101,12 +104,12 @@ while(true) {
 			console.log()
 
 			game.addMove(position, 'o')
-			if( game.isWin(position) ) {
+			if (game.isWin(position)) {
 				state = 'PLAYER2WIN'
 				break
 			}
 
-			if( ++moveCount >= game.size*game.size ) {
+			if (++moveCount >= game.size * game.size) {
 				state = 'DRAW'
 				break
 			}
@@ -128,10 +131,9 @@ while(true) {
 
 		case 'DRAW':
 			displayGameTable(game.table)
-			console.log(`Draw, Good Game!`)
+			console.log('Draw, Good Game!')
 			state = 'EXIT'
 			break
-
 
 		case 'EXIT':
 			return
@@ -143,10 +145,10 @@ function displayGameTable(table) {
 	const area = size * size
 	const digits = area.toString().split('').length
 
-	const template = new Array(size).fill(` %s `).join('|')
-	const rowDivider = '\n' + new Array((2+digits+1)*size-1).fill('-').join('') + '\n'
+	const template = new Array(size).fill(' %s ').join('|')
+	const rowDivider = '\n' + new Array((2 + digits + 1) * size - 1).fill('-').join('') + '\n'
 
-	const pad = v => ('     '+v).slice(-digits)
+	const pad = v => ('     ' + v).slice(-digits)
 
 	const text = table
 		.map(row => row.map(pad))
