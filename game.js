@@ -75,20 +75,29 @@ class Game {
 		// offset of each positions to check
 		// each set ordered by smallest offset number
 		let checkList = [
+			// column rules
 			[0, size, 2*size],
 			[-size, 0, size],
 			[-size*2, -size, 0],
 		]
 
-		if(pos%size+2 < size) 										checkList.push([0, size+1, 2*(size+1)])
-		if(pos%size+1 < size && pos%size > 0) 		checkList.push([-(size+1), 0, size+1])
-		if(pos%size > 1) 													checkList.push([-(size+1)*2, -(size+1), 0])
-		if(pos%size > 1) 													checkList.push([0, size-1, 2*(size-1)])
-		if(pos%size > 0 && pos%size+1 < size ) 		checkList.push([-(size-1), 0, size-1])
-		if(pos%size+2 < size) 										checkList.push([-(size-1)*2, -(size-1), 0])
-		if((pos/size|0) == ((pos+2)/size|0)) 			checkList.push([0, 1, 2])
-		if(((pos-1)/size|0) == ((pos+1)/size|0)) 	checkList.push([1, 0, 1])
-		if(((pos-2)/size|0) == (pos/size|0)) 			checkList.push([-2, -1, 0])
+		const col = pos%size
+		const row = row => row/size|0
+
+		// left to right diagonal rules
+		if(col+2 < size) 							checkList.push([0, size+1, 2*(size+1)])
+		if(col > 0 && col+1 < size) 	checkList.push([-(size+1), 0, size+1])
+		if(col > 1) 									checkList.push([-(size+1)*2, -(size+1), 0])
+
+		// right to left diagonal rules
+		if(col > 1) 									checkList.push([0, size-1, 2*(size-1)])
+		if(col > 0 && col+1 < size) 	checkList.push([-(size-1), 0, size-1])
+		if(col+2 < size) 							checkList.push([-(size-1)*2, -(size-1), 0])
+
+		// check same row for row rules
+		if(row(pos) == row(pos+2)) 		checkList.push([0, 1, 2])
+		if(row(pos-1) == row(pos+1)) 	checkList.push([1, 0, 1])
+		if(row(pos-2) == row(pos)) 		checkList.push([-2, -1, 0])
 
 		const insideTable = (rule) => {
 			return pos+rule[0] >= 0 && pos+rule[2] < this.size * this.size
