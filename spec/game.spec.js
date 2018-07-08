@@ -90,4 +90,83 @@ describe('A Game', () => {
 		})
 	})
 
+	describe('can', () => {
+
+		beforeEach(() => {
+			this.game = new Game()
+		})
+
+		it('determine winner on first row', () => {
+			this.game.addMove(0, 'x')
+			this.game.addMove(1, 'x')
+			this.game.addMove(2, 'x')
+			expect(this.game.isWin(2)).toBe(true)
+			expect(this.game.isWin(1)).toBe(true)
+			expect(this.game.isWin(0)).toBe(true)
+		})
+
+		it('determine winner on second row', () => {
+			this.game.addMove(3, 'x')
+			this.game.addMove(4, 'x')
+			this.game.addMove(5, 'x')
+			expect(this.game.isWin(3)).toBe(true)
+			expect(this.game.isWin(4)).toBe(true)
+			expect(this.game.isWin(5)).toBe(true)
+		})
+
+		it('determine winner on third row', () => {
+			this.game.addMove(6, 'x')
+			this.game.addMove(7, 'x')
+			this.game.addMove(8, 'x')
+			expect(this.game.isWin(6)).toBe(true)
+			expect(this.game.isWin(7)).toBe(true)
+			expect(this.game.isWin(8)).toBe(true)
+		})
+
+		it('determine winner on first column', () => {
+			this.game.addMove(0, 'x')
+			this.game.addMove(3, 'x')
+			this.game.addMove(6, 'x')
+			expect(this.game.isWin(0)).toBe(true)
+			expect(this.game.isWin(3)).toBe(true)
+			expect(this.game.isWin(6)).toBe(true)
+		})
+
+		it('determine winner on second column', () => {
+			this.game.addMove(1, 'x')
+			this.game.addMove(4, 'x')
+			this.game.addMove(7, 'x')
+			expect(this.game.isWin(1)).toBe(true)
+			expect(this.game.isWin(4)).toBe(true)
+			expect(this.game.isWin(7)).toBe(true)
+		})
+
+		it('determine winner on third column', () => {
+			this.game.addMove(2, 'x')
+			this.game.addMove(5, 'x')
+			this.game.addMove(8, 'x')
+			expect(this.game.isWin(2)).toBe(true)
+			expect(this.game.isWin(5)).toBe(true)
+			expect(this.game.isWin(8)).toBe(true)
+		})
+
+		it('determine winner on left to right diagnal', () => {
+			this.game.addMove(0, 'x')
+			this.game.addMove(4, 'x')
+			this.game.addMove(8, 'x')
+			expect(this.game.isWin(0)).toBe(true)
+			expect(this.game.isWin(4)).toBe(true)
+			expect(this.game.isWin(8)).toBe(true)
+		})
+
+		it('determine winner on right to left diagnal', () => {
+			this.game.addMove(2, 'x')
+			this.game.addMove(4, 'x')
+			this.game.addMove(6, 'x')
+			expect(this.game.isWin(2)).toBe(true)
+			expect(this.game.isWin(4)).toBe(true)
+			expect(this.game.isWin(6)).toBe(true)
+		})
+	})
+
 })

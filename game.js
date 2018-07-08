@@ -59,6 +59,53 @@ class Game {
 		return true
 	}
 
+	/**
+	 * check winning on this move
+	 * @param {number} pos - Position of move
+	 * @return {boolean} - wins
+	 */
+	isWin(pos) {
+
+		const playerMove = getTableMove(this.table, pos)
+
+		if( !Game.isPlayerMove(playerMove) )
+			return false
+
+		// offset of each positions to check
+		// each set ordered by smallest offset number
+		const checkList = [
+			[0, 1, 2],
+			[0, 2, 4],
+			[0, 3, 6],
+			[0, 4, 8],
+			[-1, 0, 1],
+			[-2, 0, 2],
+			[-2, -1, 0],
+			[-3, 0, 3],
+			[-4, 0, 4],
+			[-4, -2, 0],
+			[-6, -3, 0],
+			[-8, -4, 0],
+		]
+
+		const insideTable = (rule) => {
+			return pos+rule[0] >= 0 && pos+rule[2] < this.table.length*this.table.length
+		}
+
+		const toTableMove = (offset) => {
+			return getTableMove(this.table, pos+offset)
+		}
+
+		const isPlayerMove = (move) => {
+			return move == playerMove
+		}
+
+		return checkList
+			.filter(insideTable)
+			.map(rule => rule.map(toTableMove))	// turn all offset to moves
+			.some(moves => moves.every(isPlayerMove)) // any of set are from this player
+	}
+
 	clone() {
 		return JSON.parse(JSON.stringify(this.table))
 	}
